@@ -7,7 +7,8 @@ Exercises
 3. How would you move the food?
 4. Change the snake to respond to mouse clicks.
 """
-
+#Import choice from the random library 
+from random import choice
 from random import randrange
 from turtle import *
 
@@ -28,6 +29,16 @@ def inside(head):
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
 
+def move_food():
+#Function to move the food 1 step between bounds
+    options = [vector(10,0), vector(-10,0), vector(0,10), vector(0,-10)]
+    step = choice(options)
+#we calculate the new position
+    new_position = food + step
+#if the position stays between bounds we execute
+    if inside(new_position):
+       food.x = new_position.x
+       food.y = new_position.y
 
 def move():
     """Move snake forward one segment."""
@@ -47,6 +58,8 @@ def move():
         food.y = randrange(-15, 15) * 10
     else:
         snake.pop(0)
+#call function to move food
+    move_food ()
 
     clear()
 
